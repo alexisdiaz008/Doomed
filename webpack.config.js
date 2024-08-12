@@ -3,14 +3,13 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.jsx',
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 3000,
   },
   output: {
-    filename: "bundle.[hash].js",
+    filename: "bundle.[fullhash].js",
     path: path.resolve(__dirname, "dist"),
   },
   plugins: [
@@ -20,8 +19,8 @@ module.exports = {
     }),
   ],
   resolve: {
-    modules: [__dirname, "src", "node_modules"],
-    extensions: ["*", ".js", ".jsx", ".tsx", ".ts", ".css"],
+    modules: [__dirname, 'src', 'node_modules'],
+    extensions: ['*', '.js', '.jsx', '.tsx', '.ts', '.css'],
   },
   module: {
     rules: [
@@ -29,7 +28,7 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: require.resolve("babel-loader"),
+          loader: require.resolve('babel-loader'),
         },
       },
       {
@@ -39,18 +38,18 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [
-                    { loader: "style-loader" },
-                    { loader: "css-loader" },
-                    { loader: "sass-loader" },
+                    { loader: 'style-loader' },
+                    { loader: 'css-loader' },
+                    { loader: 'sass-loader' },
                 ],
             },
             {
                 test: /\.(png|jp(e*)g|svg|gif)$/,
                 use: [
                     {
-                        loader: "file-loader",
+                        loader: 'file-loader',
                         options: {
-                            name: "images/[hash]-[name].[ext]",
+                            name: 'images/[fullhash]-[name].[ext]',
                         },
                     },
                 ],
